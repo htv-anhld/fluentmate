@@ -51,7 +51,8 @@
           "microphonePermission": "FluentMate cần microphone để bạn luyện nói tiếng Anh"
         }
       ],
-      "expo-font"
+      "expo-font",
+      "./plugins/withAdiRegistration"
     ],
     "experiments": {
       "typedRoutes": true,
