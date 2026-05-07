@@ -44,3 +44,4 @@ app-example
 
 # Vercel
 .vercel/
+.claude/scheduled_tasks.lock

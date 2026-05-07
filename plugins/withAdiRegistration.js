@@ -9,7 +9,8 @@ const { withDangerousMod } = require('@expo/config-plugins');
 const fs = require('fs');
 const path = require('path');
 
-const ADI_TOKEN = 'DRVFWHT3QUTZGAAAAAAAAAAAA';
+// Trailing newline matches Google's sample format
+const ADI_TOKEN = 'DRVFWHT3QUTZGAAAAAAAAAAAAA\n';
 
 const withAdiRegistration = (config) => {
   return withDangerousMod(config, [
