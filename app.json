@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fluentMate",
-    "slug": "fluentMate",
+    "name": "FluentMate",
+    "slug": "fluentmate",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,9 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nokasoft.fluentmate",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "FluentMate cần microphone để bạn luyện nói tiếng Anh"
+      }
     },
     "android": {
+      "package": "com.nokasoft.fluentmate",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -19,7 +25,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["android.permission.RECORD_AUDIO", "android.permission.MODIFY_AUDIO_SETTINGS"]
     },
     "web": {
       "output": "static",
@@ -31,18 +38,32 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "imageWidth": 220,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#E6F4FE",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#1F2937"
           }
         }
-      ]
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "FluentMate cần microphone để bạn luyện nói tiếng Anh"
+        }
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9714a8d1-e762-4090-ba54-f83a64dba258"
+      }
+    },
+    "owner": "anhld29"
   }
 }

@@ -1,0 +1,39 @@
+{
+  "cli": {
+    "version": ">= 13.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "ios": { "simulator": true },
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://qemvmnkjpnjeszltqgnu.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_GQ-Xk3dN_Auuz1tl_qn5oA_355NTI55"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview",
+      "android": { "buildType": "apk" },
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://qemvmnkjpnjeszltqgnu.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_GQ-Xk3dN_Auuz1tl_qn5oA_355NTI55"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "android": { "buildType": "app-bundle" },
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://qemvmnkjpnjeszltqgnu.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_GQ-Xk3dN_Auuz1tl_qn5oA_355NTI55"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
