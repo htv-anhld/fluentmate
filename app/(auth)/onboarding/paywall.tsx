@@ -14,6 +14,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { saveProfileToBackend } from '@/services/authService';
 import { usePreferencesStore } from '@/store/preferencesStore';
+import { queryClient } from '@/services/queryClient';
 import { colors, radius, spacing, typography } from '@/constants/theme';
 
 const FEATURE_KEYS = [
@@ -67,6 +68,8 @@ export default function PaywallScreen() {
 
   const handleEnter = () => {
     setShowWelcome(false);
+    // Drop any cache populated during onboarding under the anon JWT.
+    queryClient.removeQueries();
     router.replace('/(tabs)/today');
   };
 

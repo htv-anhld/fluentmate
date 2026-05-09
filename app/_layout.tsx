@@ -16,6 +16,7 @@ import {
 } from '@expo-google-fonts/roboto';
 import { queryClient } from '@/services/queryClient';
 import { ensureSession } from '@/services/authService';
+import { supabase } from '@/services/supabase';
 import { useSyncProfile } from '@/hooks/useSyncProfile';
 import { AnimatedSplash } from '@/components/AnimatedSplash';
 import { OfflineBanner } from '@/components/OfflineBanner';
@@ -25,6 +26,20 @@ SplashScreen.preventAutoHideAsync().catch(() => {});
 
 // Kick off anonymous Supabase session as early as possible.
 ensureSession().catch(() => {});
+
+// Invalidate React Query cache whenever the Supabase auth state changes — without
+// this, queries cached under an anonymous JWT keep their (empty) results when the
+// user signs up or logs in, and stale data only clears after a full app restart.
+supabase.auth.onAuthStateChange((event) => {
+  if (
+    event === 'SIGNED_IN' ||
+    event === 'SIGNED_OUT' ||
+    event === 'USER_UPDATED' ||
+    event === 'TOKEN_REFRESHED'
+  ) {
+    queryClient.invalidateQueries();
+  }
+});
 
 function ProfileSyncBoundary() {
   useSyncProfile();

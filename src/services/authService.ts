@@ -129,8 +129,15 @@ export async function upgradeAccount(
   if ((data as { error?: string })?.error) {
     throw new Error((data as { error: string }).error);
   }
-  // Refresh the local session so the JWT carries the new email.
-  await supabase.auth.refreshSession().catch(() => {});
+  // Force a fresh sign-in with the new credentials. `refreshSession()` alone
+  // can leave the JWT carrying the original `is_anonymous: true` claim — RLS
+  // policies check that claim, so reads silently fail on the next screen until
+  // the next app launch. signInWithPassword guarantees a non-anonymous token.
+  const fresh = await supabase.auth.signInWithPassword({ email, password });
+  if (fresh.error) {
+    // Last-resort fallback so we don't lose the user's progress
+    await supabase.auth.refreshSession().catch(() => {});
+  }
   // Persist new creds so login screen can sign back in with them.
   persistDevCred({ email, password });
 }

@@ -29,6 +29,7 @@ import {
 import { useUserStore } from '@/store/useUserStore';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { supabase } from '@/services/supabase';
+import { queryClient } from '@/services/queryClient';
 import { colors, radius, spacing, typography } from '@/constants/theme';
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -69,6 +70,8 @@ export default function LoginScreen() {
         });
       }
     }
+    // Drop any cache populated under the previous (anon/old) session.
+    queryClient.removeQueries();
     completeOnboarding();
     router.replace('/(tabs)/today');
   };
